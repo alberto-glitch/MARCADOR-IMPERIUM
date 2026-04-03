@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Imperium: Carrera a la Gloria</title>
+    <meta name="description" content="Juego competitivo del Imperio Romano.">
+    <meta name="theme-color" content="#5c0000">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Pantalla de Inicio -->
+        <div id="screen-start" class="screen active">
+            <div class="logo-container">
+                <div class="emblem">S P Q R</div>
+                <h1>Imperium</h1>
+                <p>Carrera a la Gloria</p>
+            </div>
+            
+            <div class="setup-container">
+                <h2>Configuración de Jugadores</h2>
+                <div id="players-setup-list" class="players-setup-list">
+                    <!-- Jugadores dinámicos -->
+                </div>
+                <button id="btn-add-player" class="btn btn-secondary">+ Añadir Jugador</button>
+                <div class="target-score-selector">
+                    <label>Puntuación Meta:</label>
+                    <input type="number" id="input-target-score" value="50" min="10" max="1000">
+                </div>
+            </div>
+
+            <button id="btn-start-game" class="btn btn-primary">INICIAR PARTIDA</button>
+        </div>
+
+        <!-- Pantalla de Juego -->
+        <div id="screen-game" class="screen">
+            <header class="game-header">
+                <div class="timer" id="game-timer">00:00</div>
+                <div class="target-display">Meta: <span id="game-target">50</span></div>
+                <button id="btn-pause" class="icon-btn" title="Pausar">⏸</button>
+            </header>
+
+            <div id="race-track-container" class="race-track-container">
+                <!-- Pistas dinámicas -->
+            </div>
+
+            <div id="player-controls-container" class="player-controls-container">
+                <!-- Controles dinámicos -->
+            </div>
+        </div>
+
+        <!-- Pantalla de Victoria -->
+        <div id="screen-victory" class="screen">
+            <div class="victory-content">
+                <h2 class="victory-title">¡TRIUNFO!</h2>
+                <div id="winner-emblem" class="winner-emblem">👑</div>
+                <h3 id="winner-name">Jugador</h3>
+                <p id="winner-role">Emperador</p>
+                <p>Alcanzó la gloria en <span id="winner-time">00:00</span></p>
+                
+                <div class="victory-actions">
+                    <button id="btn-rematch" class="btn btn-primary">Revancha</button>
+                    <button id="btn-new-game" class="btn btn-secondary">Nueva Partida</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then((reg) => {
+                    console.log('ServiceWorker logueado correctamente.', reg.scope);
+                }).catch((err) => {
+                    console.error('Error ServiceWorker:', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
